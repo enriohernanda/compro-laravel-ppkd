@@ -12,7 +12,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.home.index');
+        $homes = Home::orderBy('id', 'DESC');
+        return view('admin.home.index', compact('$homes'));
     }
 
     /**
@@ -28,24 +29,28 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        $validasi = $request->validate([
-            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
-            'subtitle' => 'required|string',
-            'title' => 'required|string',
-            'description' => 'required|string'
-        ]);
+        try {
+            $validasi = $request->validate([
+                'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+                'subtitle' => 'required|string',
+                'title' => 'required|string',
+                'description' => 'required|string'
+            ]);
 
-        if ($request->hasFile(('image'))) {
-            $file = $request->file('image');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $path = $file->storeAs('uploads/home', $filename, 'public');
-            $validasi['image'] = $path;
+            if ($request->hasFile(('image'))) {
+                $file = $request->file('image');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $path = $file->storeAs('uploads/home', $filename, 'public');
+                $validasi['image'] = $path;
+            }
+
+            // insert into homes() values()
+            Home::create($validasi);
+
+            return redirect()->route('homeadmin.index');
+        } catch (\Exception $th) {
+            return back()->withErrors(['error' => 'Something Error!' . $th->getMessage()]);
         }
-
-        // insert into homes() values()
-        Home::create($validasi);
-
-        return redirect()->route('homeadmin.index');
     }
 
     /**

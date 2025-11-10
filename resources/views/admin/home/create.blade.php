@@ -1,6 +1,11 @@
 @extends('admin.app')
 @section('title', 'Home Create')
 @section('content')
+@if ($errors->any())
+    @foreach ($errors->all() as $error)
+        <h1 class="text-danger">{{ $error }}</h1>
+    @endforeach
+@endif
     <form action="{{ route('homeadmin.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-2">

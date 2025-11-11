@@ -16,13 +16,22 @@
             </tr>
         </thead>
         <tbody>
+            @foreach ($homes as $index => $v)
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ $index + 1 }}</td>
+                <td><img src="{{ asset('storage/' . $v->image) }}" alt="" width="100"></td>
+                <td>{{ $v->subtitle }}</td>
+                <td>{{ $v->title }}</td>
+                <td>
+                    <a href="{{ route('homeadmin.edit', $v->id) }}" class="btn btn-success">Edit</a>
+                    <form action="{{ route('homeadmin.destroy', $v->id) }}" method="post" class="d-inline" onsubmit="return confirm('Are you sure want to delete?')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
             </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

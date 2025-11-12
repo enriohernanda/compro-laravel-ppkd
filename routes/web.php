@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\HomeController;
+use App\Models\About;
 use App\Models\Home;
 use Illuminate\Support\Facades\Route;
 
@@ -11,7 +12,8 @@ Route::get('/', function () {
 })->name('home.index');
 
 Route::get('/about', function () {
-    return view('compro.about', ['active' => 'about']);
+    $about = About::first();
+    return view('compro.about', ['active' => 'about'], compact('about'));
 })->name('about.index');
 
 Route::get('/courses', function () {

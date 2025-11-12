@@ -35,7 +35,7 @@ class AboutController extends Controller
                 'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
                 'title' => 'required|string',
                 'description' => 'required|string',
-                'features' => 'required|string'
+                'features' => 'required|string',
             ]);
 
             if ($request->hasFile(('image'))) {

@@ -104,7 +104,7 @@
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
                     <h6 class="section-title bg-white text-start text-primary pe-3">About Us</h6>
                     <h1 class="mb-4">{{ Str::title($about->title) }}</h1>
-                    <p class="mb-4">{{ ucfirst($about->description) }}</p>
+                    <pre class="fs-5" style="text-align: justify; font-family: 'Times New Roman', Times, serif; white-space: pre-wrap;">{{ ucfirst($about->description) }}</pre>
                     <div class="row gy-2 gx-4 mb-4">
                         @foreach ($about->features as $feature)
                         <div class="col-sm-6">

@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InstructorController;
 use App\Models\About;
 use App\Models\Home;
+use App\Models\Instructor;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,7 +15,8 @@ Route::get('/', function () {
 
 Route::get('/about', function () {
     $about = About::orderBy('id', 'DESC')->first();
-    return view('compro.about', ['active' => 'about'], compact('about'));
+    $instructors = Instructor::orderBy('id', 'DESC')->limit(4)->get();
+    return view('compro.about', ['active' => 'about'], compact('about', 'instructors'));
 })->name('about.index');
 
 Route::get('/courses', function () {

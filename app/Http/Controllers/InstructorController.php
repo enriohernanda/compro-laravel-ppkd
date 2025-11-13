@@ -36,6 +36,7 @@ class InstructorController extends Controller
                 'name' => 'required|string',
                 'major' => 'required|string',
                 'social' => 'required|string',
+                'sosmed_urls' => 'required|string',
             ]);
 
             if ($request->hasFile('image')) {
@@ -50,11 +51,17 @@ class InstructorController extends Controller
             if ($request->social) {
                 $social = array_map('trim', explode(',', $request->social));
             }
-            $validasi['social'] = json_encode($social);
+            $validasi['social'] = $social;
+
+            $sosmed_urls = [];
+            if ($request->sosmed_urls) {
+                $sosmed_urls = array_map('trim', explode(',', $request->sosmed_urls));
+            }
+            $validasi['sosmed_urls'] = $sosmed_urls;
 
             Instructor::create($validasi);
             return redirect()->route('instructoradmin.index');
-        } catch (\Throwable $th) {
+        } catch (\Exception $th) {
             return back()->withErrors(['error' => 'Error! ' . $th->getMessage()]);
         }
     }
@@ -82,9 +89,9 @@ class InstructorController extends Controller
     public function update(Request $request, string $id)
     {
         try {
-            $instructor = instructor::find($id);
+            $instructor = Instructor::find($id);
             $validasi = $request->validate([
-                'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+                'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
                 'name' => 'required|string',
                 'major' => 'required|string',
                 'social' => 'required|string',
@@ -109,7 +116,14 @@ class InstructorController extends Controller
             if ($request->social) {
                 $social = array_map('trim', explode(',', $request->social));
             }
-            $validasi['social'] = json_encode($social);
+            $validasi['social'] = $social;
+
+            $sosmed_urls = [];
+            if ($request->sosmed_urls) {
+                $sosmed_urls = array_map('trim', explode(',', $request->sosmed_urls));
+            }
+            $validasi['sosmed_urls'] = $sosmed_urls;
+
             $instructor->update($validasi);
             return redirect()->route('instructoradmin.index');
         } catch (\Throwable $th) {
@@ -122,6 +136,14 @@ class InstructorController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // SELECT * FROM instructors WHERE id = $id
+        $instructor = Instructor::find($id);
+        // delete foto di storage / foto fisik
+        if ($instructor->image && Storage::disk('public')->exists($instructor->image)) {
+            Storage::disk('public')->delete(($instructor->image));
+        }
+        $instructor->delete();
+
+        return redirect()->route('instructoradmin.index');
     }
 }

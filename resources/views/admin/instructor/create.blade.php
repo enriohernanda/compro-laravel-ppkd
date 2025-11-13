@@ -21,8 +21,12 @@
         <input type="text" class="form-control" name="major">
     </div>
     <div class="mb-2">
-        <label for="" class="form-label">Social</label>
-        <input type="text" class="form-control" data-role="tagsinput" placeholder="Content Social" name="social">
+        <label for="" class="form-label">Social Icons</label>
+        <input type="text" class="form-control" data-role="tagsinput" placeholder="Social Icons" name="social">
+    </div>
+    <div class="mb-2">
+        <label for="" class="form-label">Social Url</label>
+        <input type="text" class="form-control" data-role="tagsinput" placeholder="Social Urls" name="sosmed_urls">
     </div>
     <button type="submit" class="btn btn-info">Add</button>
     <a href="{{ url('instructoradmin') }}" class="btn btn-secondary">Back</a>

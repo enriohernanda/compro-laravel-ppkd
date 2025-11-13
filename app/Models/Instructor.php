@@ -10,8 +10,12 @@ class Instructor extends Model
         'image',
         'name',
         'major',
-        'social'
+        'social',
+        'sosmed_urls'
     ];
 
-    protected $casts = ['social' => 'array'];
+    protected $casts = [
+        'social' => 'array',
+        'sosmed_urls' => 'array'
+    ];
 }

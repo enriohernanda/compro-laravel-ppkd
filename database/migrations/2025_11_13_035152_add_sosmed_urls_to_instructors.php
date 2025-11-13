@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('instructors', function (Blueprint $table) {
-            $table->id();
-            $table->json('social')->nullable();
-            $table->string('image');
-            $table->string('name');
-            $table->string('major');
-            $table->timestamps();
+        Schema::table('instructors', function (Blueprint $table) {
+            $table->json('sosmed_urls')->nullable()->after('social');
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('instructors');
+        Schema::table('instructors', function (Blueprint $table) {
+            //
+        });
     }
 };

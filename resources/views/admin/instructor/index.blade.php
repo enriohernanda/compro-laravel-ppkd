@@ -13,10 +13,12 @@
                 <th>Name</th>
                 <th>Major</th>
                 <th>Social</th>
+                <th>Social Url</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
+
             @foreach ($instructors as $index => $v)
             <tr>
                 <td>{{ $index + 1 }}</td>
@@ -31,8 +33,15 @@
                     </ul>
                 </td>
                 <td>
+                    <ul>
+                        @foreach ($v->sosmed_urls as $i)
+                        <li>{{ $i }}</li>
+                        @endforeach
+                    </ul>
+                </td>
+                <td>
                     <a href="{{ route('instructoradmin.edit', $v->id) }}" class="btn btn-success">Edit</a>
-                    <form action="" method="post" class="d-inline" onsubmit="return confirm('Are you sure want to delete?')">
+                    <form action="{{ route('instructoradmin.destroy', $v->id) }}" method="post" class="d-inline" onsubmit="return confirm('Are you sure want to delete?')">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Delete</button>

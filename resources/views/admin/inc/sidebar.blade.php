@@ -95,7 +95,7 @@
                 </li>
                 <li class="menu-item">
                   <a href="{{ route('instructoradmin.index') }}" class="menu-link">
-                    <div data-i18n="Container">Instructor</div>
+                    <div data-i18n="Container">Instructor Menu</div>
                   </a>
                 </li>
                 <li class="menu-item">

@@ -28,6 +28,10 @@
         <label for="" class="form-label">Social</label>
         <input type="text" class="form-control" data-role="tagsinput" placeholder="Content Social" name="social" value="{{ implode(',', $instructor->social) }}">
     </div>
+    <div class="mb-2">
+        <label for="" class="form-label">Social Url</label>
+        <input type="text" class="form-control" data-role="tagsinput" placeholder="Social Urls" name="sosmed_urls" value="{{ implode(',', $instructor->sosmed_urls) }}">
+    </div>
     <button type="submit" class="btn btn-info">Add</button>
     <a href="{{ url('instructoradmin') }}" class="btn btn-secondary">Back</a>
 </form>

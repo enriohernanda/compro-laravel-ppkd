@@ -136,9 +136,18 @@
                         </div>
                         <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
                             <div class="bg-light d-flex justify-content-center pt-2 px-1">
-                                @foreach ($ins->social as $sos_icon)
-                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-{{ $sos_icon }}"></i></a>
+                                @php
+                                $icons = is_array($ins->social) ? $ins->social : json_decode($ins->social);
+                                $urls = is_array($ins->sosmed_urls) ? $ins->sosmed_urls : json_decode($ins->sosmed_urls);
+                                @endphp
+                                @if (!empty($icons) && !empty(($urls)))
+                                @foreach ($icons as $index=> $sos_icon)
+                                @php
+                                $url = $urls[$index] ?? [];
+                                @endphp
+                                <a class="btn btn-sm-square btn-primary mx-1" href="{{ $url }}"><i class="fab fa-{{ $sos_icon }}"></i></a>
                                 @endforeach
+                                @endif
                             </div>
                         </div>
                         <div class="text-center p-4">

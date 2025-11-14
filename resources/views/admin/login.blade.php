@@ -148,6 +148,10 @@
                 <div class="mb-3">
                   <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
                 </div>
+                <div class="mb-3 text-center"><span>OR</span></div>
+                <div class="mb-3">
+                    <a href="{{ route('google-auth') }}" class="btn btn-danger w-100">Continue with Google</a>
+                </div>
               </form>
 
               <p class="text-center">

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Contact;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +13,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        if (class_exists(Contact::class)) {
+            View::composer(
+                'admin.*',
+                function ($view) {
+                    $newMessage = Contact::whereNull('reply')->count();
+                    $view->with('newMessage', $newMessage);
+                }
+            );
+        }
     }
 
     /**

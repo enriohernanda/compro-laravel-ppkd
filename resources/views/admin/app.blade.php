@@ -62,13 +62,18 @@
                 <!-- Place this tag where you want the button to render. -->
                 <li class="nav-item lh-1 me-3">
                   <a
-                    class="github-button"
-                    href="https://github.com/themeselection/sneat-html-admin-template-free"
-                    data-icon="octicon-star"
+                    {{-- class="github-button" --}}
+                    href="{{ route('contactadmin.index') }}"
+                    {{-- data-icon="octicon-star"
                     data-size="large"
                     data-show-count="true"
-                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
-                    >Star</a
+                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub" --}}
+                    >
+                    <i class="bi bi-bell"></i>
+                    @if ($newMessage > 0)
+                        <span class="badge bg-danger">{{ $newMessage }}</span>
+                    @endif
+                    </a
                   >
                 </li>
 

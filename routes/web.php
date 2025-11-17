@@ -64,3 +64,6 @@ Route::post('contactadmin/reply/{id}', [ContactController::class, 'reply'])->nam
 // Login with google:
 Route::get('auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');
 Route::get('auth/google/call-back', [GoogleAuthController::class, 'callbackGoogle'])->name('google-auth');
+
+// logout
+Route::get('logout', [GoogleAuthController::class, 'logout'])->name('logout');
